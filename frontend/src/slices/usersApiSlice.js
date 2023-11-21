@@ -1,5 +1,5 @@
-import { USERS_URL } from '../constants'
 import { apiSlice } from './apiSlice'
+import { USERS_URL } from '../constants'
 
 export const usersApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
@@ -7,7 +7,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
 			query: (data) => ({
 				url: `${USERS_URL}/auth`,
 				method: 'POST',
-				data: data,
+				body: data,
 			}),
 		}),
 	}),
