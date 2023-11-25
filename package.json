@@ -11,7 +11,8 @@
 		"dev": "concurrently \"npm run server\" \"npm run client\"",
 		"data:import": "node backend/seeder.js",
 		"data:destroy": "node backend/seeder.js -d",
-		"prepare": "husky install"
+		"prepare": "husky install",
+		"test": "conventional-commits"
 	},
 	"author": "Andrii Polukhin",
 	"license": "MIT",
