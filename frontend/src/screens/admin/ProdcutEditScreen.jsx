@@ -10,6 +10,7 @@ import { toast } from 'react-toastify'
 import {
 	useGetProductDetailsQuery,
 	useUpdateProductMutation,
+	useUploadProductImageMutation,
 } from '../../slices/productsApiSlice'
 
 const ProdcutEditScreen = () => {
@@ -34,6 +35,9 @@ const ProdcutEditScreen = () => {
 	const [updateProduct, { isLoading: loadingUpdate }] =
 		useUpdateProductMutation()
 
+	const [uploadProductImage, { isLoading: loadingUpload }] =
+		useUploadProductImageMutation()
+
 	useEffect(() => {
 		if (product) {
 			setName(product.name)
@@ -45,6 +49,7 @@ const ProdcutEditScreen = () => {
 			setDescription(product.description)
 		}
 	}, [product])
+
 	const submitHandler = async (e) => {
 		e.preventDefault()
 		const updatedProduct = {
@@ -66,6 +71,19 @@ const ProdcutEditScreen = () => {
 			navigate('/admin/productlist')
 		}
 	}
+
+	const uploadFileHandler = async (e) => {
+		const formData = new FormData()
+		formData.append('image', e.target.files[0])
+		try {
+			const res = await uploadProductImage(formData).unwrap()
+			toast.success(res.message)
+			setImage(res.image)
+		} catch (error) {
+			toast.error(error?.data?.message || error.error)
+		}
+	}
+
 	return (
 		<>
 			<Link to='/admin/productlist' className='btn btn-light my-3'>
@@ -101,16 +119,20 @@ const ProdcutEditScreen = () => {
 							></Form.Control>
 						</Form.Group>
 
-						{/* IMAGE INPUT PLACEHOLDER */}
-						{/* <Form.Group className="my-2" controlId='image'>
-							<Form.Label>Name</Form.Label>
+						<Form.Group className='my-2' controlId='image'>
+							<Form.Label>Image</Form.Label>
 							<Form.Control
 								type='text'
 								placeholder='Enter image url'
 								value={image}
 								onChange={(e) => setImage(e.target.value)}
 							></Form.Control>
-						</Form.Group> */}
+							<Form.Control
+								type='file'
+								label='Chose file'
+								onChange={uploadFileHandler}
+							></Form.Control>
+						</Form.Group>
 
 						<Form.Group className='my-2' controlId='brand'>
 							<Form.Label>Brand</Form.Label>
