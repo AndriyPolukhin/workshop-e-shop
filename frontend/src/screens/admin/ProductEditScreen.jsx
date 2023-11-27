@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+// import { useDispatch, useSelector } from 'react-redux'
 import { Form, Button } from 'react-bootstrap'
-import { FaEdit, FaTrash } from 'react-icons/fa'
+// import { FaEdit, FaTrash } from 'react-icons/fa'
 import Message from '../../components/Message'
 import Loader from '../../components/Loader'
 import FormContainer from '../../components/FormContainer'
@@ -13,7 +13,7 @@ import {
 	useUploadProductImageMutation,
 } from '../../slices/productsApiSlice'
 
-const ProdcutEditScreen = () => {
+const ProductEditScreen = () => {
 	const { id: productId } = useParams()
 	const [name, setName] = useState('')
 	const [price, setPrice] = useState(0)
@@ -184,4 +184,4 @@ const ProdcutEditScreen = () => {
 	)
 }
 
-export default ProdcutEditScreen
+export default ProductEditScreen
