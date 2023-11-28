@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-// import { useDispatch, useSelector } from 'react-redux'
 import { Form, Button } from 'react-bootstrap'
-// import { FaEdit, FaTrash } from 'react-icons/fa'
 import Message from '../../components/Message'
 import Loader from '../../components/Loader'
 import FormContainer from '../../components/FormContainer'
@@ -68,6 +66,7 @@ const ProductEditScreen = () => {
 			toast.error(res.error)
 		} else {
 			toast.success('Product updated')
+			refetch()
 			navigate('/admin/productlist')
 		}
 	}
@@ -133,6 +132,7 @@ const ProductEditScreen = () => {
 								onChange={uploadFileHandler}
 							></Form.Control>
 						</Form.Group>
+						{loadingUpload && <Loader />}
 
 						<Form.Group className='my-2' controlId='brand'>
 							<Form.Label>Brand</Form.Label>
